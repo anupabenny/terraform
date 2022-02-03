@@ -5,5 +5,5 @@ provider "aws" {
 }
 resource "aws_iam_user" "lb" {
   name = "demo"
-  path = "/system"
+  path = "/"
 }
