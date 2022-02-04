@@ -39,7 +39,7 @@ resource "aws_route_table" "my_public_route_table" {
 resource "aws_subnet" "my_subnet_public_southeast_1a" {
     vpc_id = aws_vpc.my_vpc.id
     cidr_block = "10.0.0.0/24"
-    availability_zone = "us-east-1a"
+    availability_zone = "us-east-1b"
 }
 
 #Associating above routing table to above subnet1
@@ -52,7 +52,7 @@ resource "aws_route_table_association" "my_public_route_association_for_southeas
 resource "aws_subnet" "my_subnet_public_southeast_1b" {
     vpc_id = aws_vpc.my_vpc.id
     cidr_block = "10.0.1.0/24"
-    availability_zone = "us-east-1b"
+    availability_zone = "us-east-1c"
 }
 
 #Associating above routing table to above subnet2
