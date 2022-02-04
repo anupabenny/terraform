@@ -100,7 +100,7 @@ resource "aws_lb_listener" "my_alb_listener" {
 }
 
 resource "aws_lb_target_group" "my_alb_target_group" {
-    port = 8080
+    port = 8888
     protocol = "HTTP"
     vpc_id = aws_vpc.my_vpc.id
 }
@@ -129,8 +129,8 @@ resource "aws_security_group" "my_launch_config_security_group" {
         cidr_blocks = ["0.0.0.0/0"]
     }
     ingress {
-        from_port = 8080
-        to_port = 8080
+        from_port = 8888
+        to_port = 8888
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
