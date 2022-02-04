@@ -13,7 +13,7 @@ data "aws_ami" "gold" {
 
 resource "aws_key_pair" "my_instance_key_pair" {
     key_name = "terraform_learning_key_1"
-    public_key = file("/home/ubuntu/.ssh/id_rsa.pub")
+    public_key = file("/home/jenkins/.ssh/id_rsa.pub")
 }
 
 #Creating VPC
