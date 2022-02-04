@@ -7,7 +7,7 @@ data "aws_ami" "gold" {
 
   filter {
     name   = "name"
-    values = ["test-ami2"]
+    values = ["amitest2"]
   }
 }
 
