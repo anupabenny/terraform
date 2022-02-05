@@ -36,7 +36,7 @@ resource "aws_route_table" "my_public_route_table" {
 }
 
 #Creating subnet1 in above VPC
-resource "aws_subnet" "my_subnet_public_southeast_1a" {
+resource "aws_subnet" "my_subnet_public_east_1b" {
     vpc_id = aws_vpc.my_vpc.id
     cidr_block = "10.0.0.0/24"
     availability_zone = "us-east-1b"
@@ -44,20 +44,20 @@ resource "aws_subnet" "my_subnet_public_southeast_1a" {
 
 #Associating above routing table to above subnet1
 resource "aws_route_table_association" "my_public_route_association_for_southeast_1a" {
-    subnet_id = aws_subnet.my_subnet_public_southeast_1a.id
+    subnet_id = aws_subnet.my_subnet_public_east_1b.id
     route_table_id = aws_route_table.my_public_route_table.id
 }
 
 #creating subnet2 in above VPC
-resource "aws_subnet" "my_subnet_public_southeast_1b" {
+resource "aws_subnet" "my_subnet_public_east_1c" {
     vpc_id = aws_vpc.my_vpc.id
     cidr_block = "10.0.1.0/24"
     availability_zone = "us-east-1c"
 }
 
 #Associating above routing table to above subnet2
-resource "aws_route_table_association" "my_public_route_association_for_southeast_1b" {
-    subnet_id = aws_subnet.my_subnet_public_southeast_1b.id
+resource "aws_route_table_association" "my_public_route_association_for_east_1c" {
+    subnet_id = aws_subnet.my_subnet_public_east_1c.id
     route_table_id = aws_route_table.my_public_route_table.id
 }
 
@@ -67,8 +67,8 @@ resource "aws_lb" "my_alb" {
     internal = false
     load_balancer_type = "application"
     security_groups = [aws_security_group.my_alb_security_group.id]
-    subnets = [ aws_subnet.my_subnet_public_southeast_1a.id,
-        aws_subnet.my_subnet_public_southeast_1b.id ]
+    subnets = [ aws_subnet.my_subnet_public_east_1b.id,
+        aws_subnet.my_subnet_public_east_1c.id ]
 }
 
 #Create security Group for above LB
@@ -88,7 +88,7 @@ resource "aws_security_group" "my_alb_security_group" {
     }
 }
 
-#Create LB listener to forward traffic from 80 to 8080
+#Create LB listener to forward traffic from 80 to 8888
 resource "aws_lb_listener" "my_alb_listener" {
     load_balancer_arn = aws_lb.my_alb.arn
     port = 80
@@ -159,11 +159,11 @@ resource "aws_autoscaling_group" "my_autoscaling_group" {
 
     launch_configuration = aws_launch_configuration.my_launch_configuration.id
     vpc_zone_identifier = [
-        aws_subnet.my_subnet_public_southeast_1a.id,
-        aws_subnet.my_subnet_public_southeast_1b.id
+        aws_subnet.my_subnet_public_east_1b.id,
+        aws_subnet.my_subnet_public_east_1c.id
     ]
     timeouts {
-        delete = "15m" # timeout duration for instances
+        delete = "15m"
     }
     lifecycle {
         # ensure the new instance is only created before the other one is destroyed.
