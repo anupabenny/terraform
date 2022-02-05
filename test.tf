@@ -43,7 +43,7 @@ resource "aws_subnet" "my_subnet_public_east_1b" {
 }
 
 #Associating above routing table to above subnet1
-resource "aws_route_table_association" "my_public_route_association_for_southeast_1a" {
+resource "aws_route_table_association" "my_public_route_association_for_east_1b" {
     subnet_id = aws_subnet.my_subnet_public_east_1b.id
     route_table_id = aws_route_table.my_public_route_table.id
 }
