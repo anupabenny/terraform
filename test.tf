@@ -183,7 +183,7 @@ name = "terraform-autopolicy"
 scaling_adjustment = 1
 adjustment_type = "ChangeInCapacity"
 cooldown = 300
-autoscaling_group_name = "${aws_autoscaling_group.my_autoscaling_group}"
+autoscaling_group_name = aws_autoscaling_group.my_autoscaling_group.name
 }
 
 resource "aws_cloudwatch_metric_alarm" "cpualarm" {
@@ -197,11 +197,11 @@ statistic = "Average"
 threshold = "75"
 
 dimensions = {
-AutoScalingGroupName = "${aws_autoscaling_group.my_autoscaling_group}"
+AutoScalingGroupName = aws_autoscaling_group.my_autoscaling_group.name
 }
 
 alarm_description = "This metric monitor EC2 instance cpu utilization"
-alarm_actions = ["${aws_autoscaling_policy.autopolicy.arn}"]
+alarm_actions = aws_autoscaling_policy.autopolicy.arn
 }
 
 resource "aws_autoscaling_policy" "autopolicy-down" {
@@ -209,7 +209,7 @@ name = "terraform-autopolicy-down"
 scaling_adjustment = -1
 adjustment_type = "ChangeInCapacity"
 cooldown = 300
-autoscaling_group_name = "${aws_autoscaling_group.my_autoscaling_group}"
+autoscaling_group_name = aws_autoscaling_group.my_autoscaling_group.name
 }
 
 resource "aws_cloudwatch_metric_alarm" "cpualarm-down" {
@@ -223,11 +223,11 @@ statistic = "Average"
 threshold = "10"
 
 dimensions = {
-AutoScalingGroupName = "${aws_autoscaling_group.my_autoscaling_group}"
+AutoScalingGroupName = aws_autoscaling_group.my_autoscaling_group.name
 }
 
 alarm_description = "This metric monitor EC2 instance cpu utilization"
-alarm_actions = ["${aws_autoscaling_policy.autopolicy-down.arn}"]
+alarm_actions = aws_autoscaling_policy.autopolicy-down.arn
 }
 
 output "alb-url" {
