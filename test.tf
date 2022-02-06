@@ -196,7 +196,7 @@ period = "120"
 statistic = "Average"
 threshold = "75"
 
-dimensions {
+dimensions = {
 AutoScalingGroupName = "${aws_autoscaling_group.my_autoscaling_group}"
 }
 
@@ -222,7 +222,7 @@ period = "120"
 statistic = "Average"
 threshold = "10"
 
-dimensions {
+dimensions = {
 AutoScalingGroupName = "${aws_autoscaling_group.my_autoscaling_group}"
 }
 
