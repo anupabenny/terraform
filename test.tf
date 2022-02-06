@@ -201,7 +201,7 @@ AutoScalingGroupName = aws_autoscaling_group.my_autoscaling_group.name
 }
 
 alarm_description = "This metric monitor EC2 instance cpu utilization"
-alarm_actions = aws_autoscaling_policy.autopolicy.arn
+alarm_actions = [aws_autoscaling_policy.autopolicy.arn]
 }
 
 resource "aws_autoscaling_policy" "autopolicy-down" {
@@ -227,7 +227,7 @@ AutoScalingGroupName = aws_autoscaling_group.my_autoscaling_group.name
 }
 
 alarm_description = "This metric monitor EC2 instance cpu utilization"
-alarm_actions = aws_autoscaling_policy.autopolicy-down.arn
+alarm_actions = [aws_autoscaling_policy.autopolicy-down.arn]
 }
 
 output "alb-url" {
