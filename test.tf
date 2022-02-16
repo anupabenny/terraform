@@ -150,8 +150,8 @@ resource "aws_autoscaling_attachment" "my_aws_autoscaling_attachment" {
 
 resource "aws_autoscaling_group" "my_autoscaling_group" {
     name = "my-autoscaling-group"
-    desired_capacity = 2
-    min_size = 2
+    desired_capacity = 1
+    min_size = 1
     max_size = 5
     enabled_metrics = ["GroupMinSize", "GroupMaxSize", "GroupDesiredCapacity", "GroupInServiceInstances", "GroupTotalInstances"]
     metrics_granularity = "1Minute"
@@ -189,12 +189,12 @@ autoscaling_group_name = aws_autoscaling_group.my_autoscaling_group.name
 resource "aws_cloudwatch_metric_alarm" "cpualarm" {
 alarm_name = "terraform-alarm"
 comparison_operator = "GreaterThanOrEqualToThreshold"
-evaluation_periods = "2"
+evaluation_periods = "1"
 metric_name = "CPUUtilization"
 namespace = "AWS/EC2"
-period = "120"
+period = "60"
 statistic = "Average"
-threshold = "75"
+threshold = "35"
 
 dimensions = {
 AutoScalingGroupName = aws_autoscaling_group.my_autoscaling_group.name
@@ -215,10 +215,10 @@ autoscaling_group_name = aws_autoscaling_group.my_autoscaling_group.name
 resource "aws_cloudwatch_metric_alarm" "cpualarm-down" {
 alarm_name = "terraform-alarm-down"
 comparison_operator = "LessThanOrEqualToThreshold"
-evaluation_periods = "2"
+evaluation_periods = "1"
 metric_name = "CPUUtilization"
 namespace = "AWS/EC2"
-period = "120"
+period = "60"
 statistic = "Average"
 threshold = "10"
 
